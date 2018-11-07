@@ -3,8 +3,8 @@ package Java_Labs;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 public class MyPanel extends JPanel {
-	Airplane airplane;
-	public MyPanel(Airplane air) {
+	ITransport airplane;
+	public MyPanel(ITransport air) {
 		airplane=air;
 	}
 	public void paint(Graphics g) {

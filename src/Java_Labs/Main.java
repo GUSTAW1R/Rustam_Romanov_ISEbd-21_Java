@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Rustam_R.ClassDirection.Direction;
+import Java_Labs.ClassDirection.Direction;
 
 
 public class Main {
@@ -35,7 +35,7 @@ public class Main {
 		initialize();
 	}
 
-	Airplane airplane;
+	public ITransport airplane;
 	private JPanel panel;
 	private JButton buttonLeft;
 
@@ -44,20 +44,36 @@ public class Main {
 		frame.setBounds(100, 100, 1200, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		Button button = new Button("Create");
+
+		Button button = new Button("Create Airplane");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				airplane = new Airplane(60, 10, Color.GRAY, Color.BLACK);
+				airplane = new Airplane(60, 10, Color.GRAY);
 				panel = new MyPanel(airplane);
-				panel.setBounds(100, 100, 1000, 550);
+				panel.setBounds(100, 100, 1000, 540);
 				frame.getContentPane().add(panel);
 				airplane.SetPosition(100, 100,  panel.getWidth(), panel.getHeight());
 				panel.repaint();
 
 			}
 		});
-		button.setBounds(23, 10, 79, 24);
+		button.setBounds(23, 10, 99, 24);
 		frame.getContentPane().add(button);
+
+		Button button1 = new Button("Create Radar Airplane");
+		button1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				airplane = new Radar_Airplane(60, 10, Color.GRAY, Color.BLUE);
+				panel = new MyPanel(airplane);
+				panel.setBounds(100, 100, 1000, 540);
+				frame.getContentPane().add(panel);
+				airplane.SetPosition(100, 100,  panel.getWidth(), panel.getHeight());
+				panel.repaint();
+
+			}
+		});
+		button1.setBounds(23, 50, 129, 24);
+		frame.getContentPane().add(button1);
 
 		buttonLeft = new JButton("");
 		buttonLeft.addActionListener(new ActionListener() {
