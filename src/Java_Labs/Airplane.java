@@ -3,7 +3,7 @@ package Java_Labs;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import Rustam_R.ClassDirection.Direction;
+import Java_Labs.ClassDirection.Direction;
 
 public class Airplane {
 	private int _startPosX;

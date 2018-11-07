@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import Rustam_R.ClassDirection.Direction;
+import Java_Labs.ClassDirection.Direction;
 
 
 public class Main {
