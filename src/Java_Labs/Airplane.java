@@ -5,85 +5,61 @@ import java.awt.Graphics;
 
 import Java_Labs.ClassDirection.Direction;
 
-public class Airplane {
-	private int _startPosX;
-	
-	private int _startPosY;
-	
-	private int _pictureWidth;
-	
-	private int _pictureHeight;
-	
+public class Airplane extends Vehicle {
+
 	private final int AirplaneWidth = 140;
-	
+
 	private final int AirplaneHeight = 60;
-	private int MaxSpeed;
-	void getMaxSpeed(int MaxSpeed) {this.MaxSpeed=MaxSpeed;}
-	int setMaxSpeed() {return this.MaxSpeed;}
-	private int Weight;
-	void getWeight(int Weight) {this.Weight=Weight;}
-	int setWeight() {return this.Weight;}
-	private Color MainColor;
-	void getMainColor(Color MainColor) {this.MainColor=MainColor;}
-	Color setMainColor() {return this.MainColor;}
+
 	private Color DopColor;
 	void getDopColor(Color DopColor) {this.DopColor=DopColor;}
-	Color setDopColorr() {return this.DopColor;}
-	
-	public Airplane(int maxSpeed, int weight, Color mainColor, Color dopColor)
+	Color setDopColor() {return this.DopColor;}
+
+	public Airplane(int maxSpeed, int weight, Color mainColor)
 	{
 		MaxSpeed = maxSpeed;
 		Weight = weight;
 		MainColor = mainColor;
-		DopColor = dopColor;
-
 	}
 
-	public void SetPosition(int x, int y, int width, int height)
-	{
-		_startPosX = x;
-		_startPosY = y;
-		_pictureWidth = width;
-		_pictureHeight = height;
-	}
 
 	public void MoveTransport(Direction direction)
 	{
 		float step = MaxSpeed;
 		switch (direction)
 		{
-		case Left:
-		{
-			if (_startPosX - step > 0)
+			case Left:
 			{
-				_startPosX -= step;
+				if (_startPosX - step > 0)
+				{
+					_startPosX -= step;
+				}
+				break;
 			}
-			break;
-		}
-		case Right:
-		{
-			if (_startPosX + step + AirplaneWidth < _pictureWidth)
+			case Right:
 			{
-				_startPosX += step;
+				if (_startPosX + step + AirplaneWidth < _pictureWidth)
+				{
+					_startPosX += step;
+				}
+				break;
 			}
-			break;
-		}
-		case Up:
-		{
-			if (_startPosY - step > 0)
+			case Up:
 			{
-				_startPosY -= step;
+				if (_startPosY - step > 0)
+				{
+					_startPosY -= step;
+				}
+				break;
 			}
-			break;
-		}
-		case Down:
-		{
-			if (_startPosY + step + AirplaneHeight <= _pictureHeight)
+			case Down:
 			{
-				_startPosY += step;
+				if (_startPosY + step + AirplaneHeight <= _pictureHeight)
+				{
+					_startPosY += step;
+				}
+				break;
 			}
-			break;
-		}
 		}
 	}
 	public void DrawAirplane(Graphics g)
@@ -101,9 +77,6 @@ public class Airplane {
 		int x2_2points[] = {_startPosX, _startPosX - 20, _startPosX - 30, _startPosX + 10, _startPosX, _startPosX + 20};
 		int y2_2points[] = {_startPosY, _startPosY - 30, _startPosY - 30, _startPosY - 30, _startPosY - 30, _startPosY};
 		int n2_2points = 6;
-		int x3points[] = {_startPosX + 50, _startPosX + 50, _startPosX + 40, _startPosX + 70, _startPosX + 60, _startPosX + 60};
-		int y3points[] = {_startPosY, _startPosY - 10, _startPosY - 10, _startPosY - 10, _startPosY - 10, _startPosY};
-		int n3points = 6;
 		g.setColor(MainColor);
 		g.drawPolygon(xpoints, ypoints, npoints);
 		g.fillPolygon(xpoints, ypoints, npoints);
@@ -123,9 +96,7 @@ public class Airplane {
 		g.setColor(Color.DARK_GRAY);
 		g.drawPolygon(x2_2points, y2_2points, n2_2points);
 		g.fillPolygon(x2_2points, y2_2points, n2_2points);
-		g.setColor(DopColor);
-		g.drawPolygon(x3points, y3points, n3points);
-		g.fillPolygon(x3points, y3points, n3points);
+
 	}
 
 }
