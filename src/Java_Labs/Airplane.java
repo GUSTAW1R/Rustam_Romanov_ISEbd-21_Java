@@ -65,7 +65,6 @@ public class Airplane extends Vehicle {
 	public void DrawAirplane(Graphics g)
 	{
 
-		//g.drawRect(20, 20, 999, 549);
 		int xpoints[] = {_startPosX,_startPosX + 120,_startPosX + 130,_startPosX + 130,_startPosX + 120, _startPosX + 10, _startPosX - 30};
 		int ypoints[] = {_startPosY,_startPosY,_startPosY + 10,_startPosY + 30,_startPosY + 40, _startPosY + 40, _startPosY + 10};
 		int npoints = 7;
