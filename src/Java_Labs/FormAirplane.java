@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,14 +14,14 @@ import javax.swing.SwingConstants;
 import Java_Labs.ClassDirection.Direction;
 
 
-public class Main {
+public class FormAirplane {
 	private JFrame frame;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main window = new Main();
+					FormAirplane window = new FormAirplane();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -31,7 +30,7 @@ public class Main {
 		});
 	}
 
-	public Main() {
+	public FormAirplane() {
 		initialize();
 	}
 
@@ -49,7 +48,7 @@ public class Main {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				airplane = new Airplane(60, 10, Color.GRAY);
-				panel = new MyPanel(airplane);
+				panel = new PanelAirplane();
 				panel.setBounds(100, 100, 1000, 540);
 				frame.getContentPane().add(panel);
 				airplane.SetPosition(100, 100,  panel.getWidth(), panel.getHeight());
@@ -64,7 +63,7 @@ public class Main {
 		button1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				airplane = new Radar_Airplane(60, 10, Color.GRAY, Color.BLUE);
-				panel = new MyPanel(airplane);
+				panel = new PanelAirplane();
 				panel.setBounds(100, 100, 1000, 540);
 				frame.getContentPane().add(panel);
 				airplane.SetPosition(100, 100,  panel.getWidth(), panel.getHeight());
