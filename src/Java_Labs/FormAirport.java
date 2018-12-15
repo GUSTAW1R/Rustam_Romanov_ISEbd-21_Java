@@ -1,20 +1,18 @@
 package Java_Labs;
 import java.awt.*;
-import javax.swing.JColorChooser;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class FormAirport {
-
     private JFrame frame;
     private JPanel panel;
+    private JList listBoxLevels;
+    private DefaultListModel model;
     private JTextField maskedTextBox1;
-    Airport<ITransport> airport;
+    MultiLevelParking hangar;
     private PanelAirplane pictureBoxTakeAir;
     private PanelAirport panelAirport;
     /**
@@ -45,13 +43,13 @@ public class FormAirport {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1050, 500);
+        frame.setBounds(100, 100, 1050, 503);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         panelAirport = new PanelAirport();
-        panelAirport.setBounds(10, 11, 768, 432);
+        panelAirport.setBounds(0, 11, 777, 443);
         frame.getContentPane().add(panelAirport);
-        airport = panelAirport.getAirport();
+        hangar = panelAirport.getAirport();
         JPanel pictureBoxHangar = new JPanel();
         pictureBoxHangar.setBounds(0, 0, 778, 466);
         frame.getContentPane().add(pictureBoxHangar);
@@ -61,12 +59,11 @@ public class FormAirport {
             public void actionPerformed(ActionEvent arg0) {
                 Color mainColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
                 Airplane air = new Airplane(100, 1000, mainColor);
-                int place = airport.Plus(air);
-                PanelAirplane.initialization = true;
+                int place = hangar.getHangar(listBoxLevels.getSelectedIndex()).Plus(air);
                 panelAirport.repaint();
             }
         });
-        buttonSetAir.setBounds(790, 13, 110, 20);
+        buttonSetAir.setBounds(790, 141, 118, 41);
         frame.getContentPane().add(buttonSetAir);
 
         JButton buttonSetAirBus = new JButton("Radar Airplane");
@@ -75,12 +72,11 @@ public class FormAirport {
                 Color mainColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
                 Color dopColor = JColorChooser.showDialog(null, "Choose a color", Color.GRAY);
                 Radar_Airplane air = new Radar_Airplane(100, 1000, mainColor, dopColor);
-                int place = airport.Plus(air);
-                PanelAirplane.initialization = true;
+                int place = hangar.getHangar(listBoxLevels.getSelectedIndex()).Plus(air);
                 panelAirport.repaint();
             }
         });
-        buttonSetAirBus.setBounds(790, 104, 140, 20);
+        buttonSetAirBus.setBounds(790, 182, 118, 41);
         frame.getContentPane().add(buttonSetAirBus);
 
         JPanel panel = new JPanel();
@@ -93,7 +89,7 @@ public class FormAirport {
         panel.add(pictureBoxTakeAir);
 
         JLabel label = new JLabel("Take Plane");
-        label.setBounds(12, 0, 110, 20);
+        label.setBounds(12, 0, 118, 16);
         panel.add(label);
 
         maskedTextBox1 = new JTextField();
@@ -109,7 +105,7 @@ public class FormAirport {
         buttonTakeAir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!maskedTextBox1.getText().equals("")) {
-                    ITransport air = airport.Minus(Integer.parseInt(maskedTextBox1.getText()));
+                    ITransport air = hangar.getHangar(listBoxLevels.getSelectedIndex()).Minus(Integer.parseInt(maskedTextBox1.getText()));
                     if (air != null) {
                         air.SetPosition(35,30, pictureBoxTakeAir.getWidth(), pictureBoxTakeAir.getHeight());
                         pictureBoxTakeAir.setAir(air);
@@ -122,7 +118,26 @@ public class FormAirport {
                 }
             }
         });
-        buttonTakeAir.setBounds(22, 64, 110, 20);
+        buttonTakeAir.setBounds(22, 64, 97, 25);
         panel.add(buttonTakeAir);
+
+        listBoxLevels = new JList();
+        listBoxLevels.setBounds(790, 11, 118, 118);
+        frame.getContentPane().add(listBoxLevels);
+        model = new DefaultListModel();
+        for(int i = 0; i < 6; i++)
+        {
+            model.addElement("Level " + (i + 1));
+        }
+        listBoxLevels.setModel(model);
+        listBoxLevels.setSelectedIndex(0);
+        panelAirport.setListLevels(listBoxLevels);
+        listBoxLevels.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                panelAirport.repaint();
+            }
+        });
+
     }
 }
